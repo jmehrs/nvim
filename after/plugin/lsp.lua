@@ -2,7 +2,19 @@ local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
 
+local ok, wf = pcall(require, "vim.lsp._watchfiles")
+if ok then
+    -- disable lsp watcher. Too slow on linux
+    wf._watchfunc = function()
+        return function() end
+    end
+end
+
 lsp.ensure_installed({
+  'lua_ls',
+  'tsserver',
+  'cssls',
+  'html',
   'pyright',
   'rust_analyzer'
 })
