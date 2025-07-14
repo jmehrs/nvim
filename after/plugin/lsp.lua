@@ -10,15 +10,6 @@ if ok then
     end
 end
 
-lsp.ensure_installed({
-  'lua_ls',
-  'tsserver',
-  'cssls',
-  'html',
-  'pyright',
-  'rust_analyzer'
-})
-
 -- Fix Undefined global 'vim'
 lsp.configure('lua-language-server', {
     settings = {
