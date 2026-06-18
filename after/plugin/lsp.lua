@@ -115,6 +115,45 @@ vim.lsp.enable("tinymist")
 
 vim.lsp.config("rust_analyzer", {})
 vim.lsp.enable("rust_analyzer")
+
+vim.lsp.config("golangci_lint_ls", {
+    cmd = { 'golangci-lint-langserver' },
+    filetypes = { 'go', 'gomod' },
+    init_options = {
+        command = {
+            'golangci-lint',
+            'run',
+            -- disable all output formats that might be enabled by the users .golangci.yml
+            '--output.text.path=',
+            '--output.tab.path=',
+            '--output.html.path=',
+            '--output.checkstyle.path=',
+            '--output.junit-xml.path=',
+            '--output.teamcity.path=',
+            '--output.sarif.path=',
+            -- disable stats output
+            '--show-stats=false',
+            -- enable JSON output to be used by the language server
+            '--output.json.path=stdout',
+        },
+    },
+    root_markers = {
+        '.golangci.yml',
+        '.golangci.yaml',
+        '.golangci.toml',
+        '.golangci.json',
+        'go.work',
+        'go.mod',
+        '.git',
+    },
+})
+vim.lsp.enable("golangci_lint_ls")
+
+vim.lsp.config("gopls", {})
+vim.lsp.enable("gopls")
+
+vim.lsp.config("ts_ls", {})
+vim.lsp.enable("ts_ls")
 ---------------------------------------------------------------------
 -- Diagnostics
 ---------------------------------------------------------------------
